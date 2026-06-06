@@ -1,0 +1,1247 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Notes de séance · Conseil municipal · Osny (95)</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --marine:#1a2744;--marine-light:#243460;--marine-dark:#111a2e;
+  --or:#c9a84c;--or-light:#e8c97a;--or-pale:#fdf8ed;
+  --bg:#f4f2ee;--surface:#fff;--surface2:#faf9f6;
+  --text:#1a2744;--text2:#4a5568;--text3:#718096;
+  --border:#e2ddd4;--border2:#d4cec3;
+  --success:#2d7a4f;--danger:#c0392b;
+  --radius:10px;--radius-sm:6px;
+}
+body{background:var(--bg);color:var(--text);min-height:100vh;font-size:14px;font-family:'DM Sans',sans-serif}
+.app-shell{max-width:1200px;margin:0 auto;padding:16px}
+
+.app-header{background:var(--marine);color:#fff;border-radius:var(--radius);padding:16px 24px;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;border-bottom:2px solid var(--or)}
+.app-header-left{display:flex;align-items:center;gap:14px}
+.logo-mark{width:40px;height:40px;background:var(--or);border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:700;font-size:15px;color:var(--marine);flex-shrink:0}
+.app-title{font-family:'Syne',sans-serif;font-size:12px;font-weight:500;color:rgba(255,255,255,.7);line-height:1.7}
+.app-title strong{font-size:15px;color:#fff;display:block;font-weight:600}
+.header-stats{display:flex;gap:20px;font-size:11px;color:rgba(255,255,255,.55)}
+.hstat{text-align:center}
+.hstat b{display:block;font-size:18px;font-weight:700;color:var(--or);font-family:'Syne',sans-serif}
+
+/* SAVE ALERT */
+.save-alert{display:none;align-items:center;gap:10px;background:#fffbea;border:2px solid var(--or);border-radius:var(--radius-sm);padding:10px 16px;margin-bottom:14px}
+.save-alert.visible{display:flex;animation:pulse-border 2s infinite}
+@keyframes pulse-border{0%,100%{border-color:var(--or)}50%{border-color:var(--or-light)}}
+.save-alert-text{flex:1;font-size:13px;font-weight:500;color:#7a5c00}
+.btn-save-pulse{background:var(--or);color:var(--marine);font-weight:700;border:none;padding:8px 18px;border-radius:var(--radius-sm);cursor:pointer;font-family:'DM Sans',sans-serif;font-size:13px;display:flex;align-items:center;gap:6px;animation:pulse-btn 2s infinite}
+@keyframes pulse-btn{0%,100%{box-shadow:0 0 0 0 rgba(201,168,76,.5)}70%{box-shadow:0 0 0 8px rgba(201,168,76,0)}}
+
+/* NAV */
+.nav-tabs{display:flex;gap:3px;background:var(--surface);border-radius:var(--radius);padding:5px;border:1px solid var(--border);margin-bottom:14px;overflow-x:auto}
+.nav-tab{flex-shrink:0;padding:7px 13px;border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;cursor:pointer;border:none;background:transparent;color:var(--text2);white-space:nowrap;transition:.15s}
+.nav-tab:hover{background:var(--bg)}
+.nav-tab.active{background:var(--marine);color:#fff}
+.nav-tab .badge{background:var(--or);color:var(--marine);border-radius:20px;padding:1px 6px;font-size:10px;font-weight:700;margin-left:3px}
+.tab-content{display:none}.tab-content.active{display:block}
+
+/* CARDS */
+.card{background:var(--surface);border-radius:var(--radius);border:1px solid var(--border);padding:18px;margin-bottom:14px}
+.card-title{font-family:'Syne',sans-serif;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--text2);margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.card-title .dot{width:4px;height:4px;border-radius:50%;background:var(--or);flex-shrink:0}
+
+/* BOUTONS */
+.btn{padding:8px 16px;border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;cursor:pointer;border:none;transition:.15s;display:inline-flex;align-items:center;gap:6px}
+.btn-primary{background:var(--marine);color:#fff}.btn-primary:hover{background:var(--marine-light)}
+.btn-or{background:var(--or);color:var(--marine);font-weight:600}.btn-or:hover{background:var(--or-light)}
+.btn-ghost{background:transparent;color:var(--text2);border:1px solid var(--border)}.btn-ghost:hover{background:var(--bg)}
+.btn-sm{padding:5px 11px;font-size:12px}
+.btn-danger{background:#fef2f2;color:var(--danger);border:1px solid #fecaca}
+
+/* FORMULAIRES */
+input[type=text],textarea,select{width:100%;padding:8px 11px;border-radius:var(--radius-sm);border:1px solid var(--border);font-family:'DM Sans',sans-serif;font-size:13px;color:var(--text);background:var(--surface2);outline:none;transition:.15s}
+input[type=text]:focus,textarea:focus,select:focus{border-color:var(--or);background:#fff}
+textarea{resize:vertical;min-height:80px}
+
+/* MODÈLE */
+.model-selector{display:flex;gap:8px;margin-bottom:14px}
+.model-card{flex:1;border:2px solid var(--border);border-radius:var(--radius-sm);padding:10px 12px;cursor:pointer;transition:.15s;position:relative;background:var(--surface2)}
+.model-card.selected{border-color:var(--or);background:var(--or-pale)}
+.model-card .mc-name{font-family:'Syne',sans-serif;font-size:12px;font-weight:700;color:var(--marine);margin-bottom:2px}
+.model-card .mc-desc{font-size:11px;color:var(--text2);line-height:1.4;margin-bottom:4px}
+.model-card .mc-price{font-size:11px;font-weight:600}
+.model-card .mc-badge{position:absolute;top:-8px;right:8px;background:var(--or);color:var(--marine);font-size:9px;font-weight:700;padding:2px 6px;border-radius:20px}
+.model-haiku .mc-price{color:var(--success)}
+.model-sonnet .mc-price{color:#c07a2d}
+
+/* IMPORT */
+.import-zone{background:var(--or-pale);border:2px solid var(--or);border-radius:var(--radius);padding:20px;margin-bottom:16px}
+.import-zone-title{font-family:'Syne',sans-serif;font-size:14px;font-weight:600;color:var(--marine);margin-bottom:4px}
+.import-zone-sub{font-size:12px;color:var(--text2);margin-bottom:12px}
+.file-preview{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);padding:10px 14px;margin-top:10px;display:none;align-items:center;gap:10px}
+.file-preview.visible{display:flex}
+.file-info{flex:1}
+.file-info .fname{font-size:13px;font-weight:500;color:var(--marine)}
+.file-info .fmeta{font-size:11px;color:var(--text3);margin-top:2px}
+.pdf-progress{background:var(--border);border-radius:20px;height:4px;overflow:hidden;margin-top:5px}
+.pdf-progress-fill{height:100%;background:var(--or);border-radius:20px;width:0;transition:width .3s}
+
+/* PROGRESS ANALYSE */
+.analyse-progress{background:var(--marine);border-radius:var(--radius);padding:20px;margin-bottom:14px;display:none}
+.analyse-progress.visible{display:block}
+.analyse-progress-title{font-family:'Syne',sans-serif;font-size:13px;font-weight:600;color:var(--or);margin-bottom:12px}
+.analyse-progress-bar-wrap{background:rgba(255,255,255,.1);border-radius:20px;height:6px;margin-bottom:10px;overflow:hidden}
+.analyse-progress-bar{height:100%;background:var(--or);border-radius:20px;transition:width .5s;width:0}
+.analyse-progress-step{font-size:12px;color:rgba(255,255,255,.7);margin-bottom:4px}
+.analyse-progress-log{max-height:120px;overflow-y:auto}
+.analyse-log-item{font-size:11.5px;color:rgba(255,255,255,.6);padding:3px 0;border-bottom:1px solid rgba(255,255,255,.08);display:flex;align-items:center;gap:8px}
+.analyse-log-item.done{color:#4ade80}
+.analyse-log-item.active{color:var(--or)}
+
+/* DÉLIBÉRATIONS */
+.delib-card{background:var(--surface);border-radius:var(--radius);border:1px solid var(--border);margin-bottom:14px;overflow:hidden}
+.delib-card-header{padding:14px 16px;display:flex;align-items:flex-start;gap:12px;cursor:pointer;transition:.15s}
+.delib-card-header:hover{background:var(--surface2)}
+.delib-num{width:28px;height:28px;background:var(--marine);color:var(--or);border-radius:6px;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:700;font-size:12px;flex-shrink:0}
+.delib-header-body{flex:1}
+.delib-title{font-size:13.5px;font-weight:600;color:var(--text);margin-bottom:4px}
+.delib-pills{display:flex;gap:5px;flex-wrap:wrap}
+.delib-body{padding:0 16px 16px;border-top:1px solid var(--border);display:none}
+.delib-body.open{display:block}
+.delib-section{margin-top:14px}
+.delib-section-label{font-family:'Syne',sans-serif;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text3);margin-bottom:6px}
+.delib-section-content{font-size:13px;color:var(--text2);line-height:1.65;background:var(--surface2);border-radius:var(--radius-sm);padding:10px 12px}
+.delib-section-content.rouge{background:#fff5f5;border-left:3px solid var(--danger)}
+.delib-section-content.orange{background:var(--or-pale);border-left:3px solid var(--or)}
+.delib-section-content.vert{background:#f0fdf4;border-left:3px solid var(--success)}
+
+/* POINTS SENSIBLES DANS DELIB */
+.ps-item{background:var(--surface2);border-radius:var(--radius-sm);padding:8px 10px;margin-bottom:6px;border-left:3px solid var(--or);font-size:12.5px;color:var(--text2)}
+.ps-item.rouge{border-color:var(--danger);background:#fff5f5}
+.ps-item.vert{border-color:var(--success);background:#f0fdf4}
+
+/* ANGLES DANS DELIB */
+.angle-mini{background:linear-gradient(135deg,var(--marine),var(--marine-light));border-radius:var(--radius-sm);padding:10px 12px;margin-bottom:6px}
+.angle-mini-tag{display:inline-block;padding:1px 7px;border-radius:20px;font-size:9px;font-weight:700;background:rgba(201,168,76,.2);color:var(--or);margin-bottom:4px}
+.angle-mini-title{font-size:12.5px;font-weight:600;color:var(--or);margin-bottom:3px}
+.angle-mini-desc{font-size:12px;color:rgba(255,255,255,.8);line-height:1.55}
+
+/* MINI CHAT */
+.chat-mini{background:var(--marine-dark);border-radius:var(--radius-sm);padding:14px;margin-top:12px;display:none}
+.chat-mini.open{display:block}
+.chat-mini-msgs{max-height:260px;overflow-y:auto;margin-bottom:10px;display:flex;flex-direction:column;gap:8px}
+.cmsg-user{background:var(--or);color:var(--marine);border-radius:8px 8px 2px 8px;padding:8px 12px;font-size:12.5px;line-height:1.5;align-self:flex-end;max-width:88%}
+.cmsg-ai{background:rgba(255,255,255,.08);color:rgba(255,255,255,.88);border-radius:8px 8px 8px 2px;padding:10px 12px;font-size:12.5px;line-height:1.6;max-width:92%}
+.chat-mini-input{display:flex;gap:6px}
+.chat-mini-input input{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);color:#fff;border-radius:var(--radius-sm);padding:7px 10px;flex:1;font-size:12px;font-family:'DM Sans',sans-serif}
+.chat-mini-input input::placeholder{color:rgba(255,255,255,.35)}
+.chat-mini-input input:focus{outline:none;border-color:var(--or)}
+.chat-mini-send{background:var(--or);color:var(--marine);border:none;border-radius:var(--radius-sm);padding:7px 12px;cursor:pointer;font-size:12px;font-weight:700;font-family:'DM Sans',sans-serif}
+.quickq-btn{background:rgba(255,255,255,.08);color:rgba(255,255,255,.75);border:1px solid rgba(255,255,255,.12);border-radius:20px;padding:3px 9px;font-size:11px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:.15s}
+.quickq-btn:hover{background:rgba(255,255,255,.15)}
+
+/* RÉSUMÉ FINAL */
+.resume-final{background:linear-gradient(135deg,var(--marine),var(--marine-light));border-radius:var(--radius);padding:20px;color:#fff;margin-bottom:14px}
+.resume-final h3{font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:var(--or);margin-bottom:10px}
+.resume-final p{font-size:13.5px;color:rgba(255,255,255,.88);line-height:1.7}
+.resume-section{margin-top:12px}
+.resume-section-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:rgba(255,255,255,.45);margin-bottom:5px}
+.resume-item{font-size:12.5px;color:rgba(255,255,255,.8);padding:4px 0;border-bottom:1px solid rgba(255,255,255,.08);line-height:1.5}
+.resume-item:last-child{border-bottom:none}
+
+/* DOSSIERS SUGGÉRÉS */
+.dossier-suggere{display:flex;align-items:center;justify-content:space-between;background:var(--surface2);border-radius:var(--radius-sm);border:1px solid var(--border);padding:10px 13px;margin-bottom:7px}
+
+/* PILLS */
+.pill{display:inline-flex;align-items:center;gap:4px;padding:3px 9px;border-radius:20px;font-size:11px;font-weight:500}
+.pill-marine{background:rgba(26,39,68,.08);color:var(--marine)}
+.pill-or{background:#fef8e8;color:#8a6010}
+.pill-green{background:#f0fdf4;color:#2d7a4f}
+.pill-red{background:#fef2f2;color:#c0392b}
+.pill-gray{background:var(--bg);color:var(--text2)}
+.pill-blue{background:#eff6ff;color:#1d4ed8}
+
+/* VOTE */
+.vote-select{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.vote-btn{padding:5px 12px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;border:2px solid transparent;transition:.15s;font-family:'DM Sans',sans-serif}
+.vote-btn.pour{background:#f0fdf4;color:var(--success);border-color:#86efac}
+.vote-btn.contre{background:#fef2f2;color:var(--danger);border-color:#fca5a5}
+.vote-btn.abstention{background:#fef8e8;color:#8a6010;border-color:#fcd34d}
+.vote-btn.pour.active{background:var(--success);color:#fff}
+.vote-btn.contre.active{background:var(--danger);color:#fff}
+.vote-btn.abstention.active{background:#d97706;color:#fff}
+
+/* CHAT GÉNÉRAL */
+.chat-area{background:var(--surface2);border-radius:var(--radius);min-height:250px;max-height:380px;overflow-y:auto;padding:14px;margin-bottom:10px;border:1px solid var(--border)}
+.chat-msg{margin-bottom:12px}
+.chat-msg.user .bubble{background:var(--marine);color:#fff;border-radius:10px 10px 2px 10px;padding:9px 13px;font-size:13px;line-height:1.6;max-width:85%;margin-left:auto}
+.chat-msg.ai .bubble{background:var(--surface);border:1px solid var(--border);border-radius:10px 10px 10px 2px;padding:11px 14px;font-size:13px;line-height:1.6;max-width:92%}
+.chat-sender{font-size:11px;color:var(--text3);margin-bottom:3px}
+.chat-sender.right{text-align:right}
+.chat-input-row{display:flex;gap:8px;margin-bottom:10px}
+.chat-input-row input{flex:1}
+
+/* GRILLES */
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+.stat-mini{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px 14px;text-align:center}
+.stat-mini .val{font-family:'Syne',sans-serif;font-size:22px;font-weight:700;color:var(--marine)}
+.stat-mini .lbl{font-size:11px;color:var(--text3);margin-top:2px}
+
+/* SÉANCES HISTORIQUE */
+.seance-card{background:var(--surface);border-radius:var(--radius);border:1px solid var(--border);padding:14px 18px;margin-bottom:10px;transition:.15s;cursor:pointer}
+.seance-card:hover{border-color:var(--or);transform:translateY(-1px)}
+.seance-date-lbl{font-family:'Syne',sans-serif;font-size:11px;color:var(--text3);font-weight:500;letter-spacing:.05em}
+.seance-title-lbl{font-size:14px;font-weight:500;color:var(--text)}
+.seance-meta{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.seance-excerpt{font-size:12px;color:var(--text2);line-height:1.6;margin-top:8px}
+
+/* DOSSIERS */
+.dossier-card{background:var(--surface);border-radius:var(--radius);border:1px solid var(--border);padding:12px 16px;margin-bottom:8px;display:flex;align-items:flex-start;gap:12px}
+.dossier-icon{width:36px;height:36px;border-radius:8px;background:rgba(26,39,68,.06);display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0}
+.dossier-body{flex:1}
+.dossier-title{font-size:13px;font-weight:500;color:var(--text);margin-bottom:3px}
+.dossier-meta-txt{font-size:11px;color:var(--text3)}
+
+/* FICHE */
+.btn-pdf{background:var(--marine);color:#fff;border:none;padding:8px 16px;border-radius:var(--radius-sm);cursor:pointer;font-size:13px;font-weight:500;font-family:'DM Sans',sans-serif;display:inline-flex;align-items:center;gap:6px}
+.btn-pdf:hover{background:var(--marine-light)}
+
+/* VIVANTE */
+.vivante-delib{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px;margin-bottom:10px}
+.vivante-delib-title{font-size:13.5px;font-weight:600;color:var(--text);margin-bottom:10px}
+.echange-item{display:flex;gap:8px;padding:7px 0;border-top:1px solid var(--border);font-size:12.5px;color:var(--text2)}
+.echange-auteur{font-weight:600;color:var(--marine);min-width:80px;flex-shrink:0}
+
+/* SEARCH */
+.search-result{background:var(--surface);border-radius:var(--radius-sm);border:1px solid var(--border);padding:11px 14px;margin-bottom:8px;cursor:pointer;transition:.15s}
+.search-result:hover{border-color:var(--or)}
+.search-highlight{background:#fef8e8;color:#8a6010;padding:1px 3px;border-radius:3px}
+.tag{display:inline-block;padding:3px 8px;border-radius:4px;font-size:11px;font-weight:500;background:rgba(26,39,68,.06);color:var(--text2)}
+
+/* SYNC */
+.sync-item{display:flex;align-items:center;justify-content:space-between;padding:11px 0;border-bottom:1px solid var(--border)}
+.sync-item:last-child{border-bottom:none}
+.sync-label{font-size:13px;color:var(--text);font-weight:500}
+.sync-meta-txt{font-size:11px;color:var(--text3);margin-top:2px}
+
+/* MODALS */
+.modal-backdrop{display:none;position:fixed;inset:0;background:rgba(26,39,68,.55);z-index:100;align-items:flex-start;justify-content:center;padding-top:50px;overflow-y:auto}
+.modal-backdrop.open{display:flex}
+.modal{background:#fff;border-radius:var(--radius);width:720px;max-width:96vw;max-height:85vh;overflow-y:auto;border-top:3px solid var(--or);margin-bottom:40px}
+.modal-header{padding:18px 22px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;background:#fff;z-index:1}
+.modal-header h3{font-family:'Syne',sans-serif;font-size:15px;font-weight:600;color:var(--marine)}
+.modal-body{padding:22px}
+.modal-close{background:none;border:none;font-size:20px;cursor:pointer;color:var(--text3)}
+
+.empty-state{text-align:center;padding:40px 20px;color:var(--text3)}
+.empty-state .icon{font-size:34px;margin-bottom:10px;opacity:.35}
+.empty-state p{font-size:13.5px}
+.cost-line{font-size:11px;color:var(--text3);margin-top:4px}
+
+#toast{position:fixed;bottom:20px;right:20px;background:var(--marine);color:#fff;padding:9px 16px;border-radius:var(--radius-sm);font-size:13px;font-weight:500;z-index:9999;opacity:0;transform:translateY(8px);transition:.3s;pointer-events:none;border-left:3px solid var(--or);max-width:300px}
+#toast.show{opacity:1;transform:translateY(0)}
+</style>
+</head>
+<body>
+<div class="app-shell">
+
+<header class="app-header">
+  <div class="app-header-left">
+    <div class="logo-mark">CM</div>
+    <div class="app-title">
+      <strong>Notes de séance</strong>
+      Conseil municipal · Osny (95) · Groupe Osny Intensément
+    </div>
+  </div>
+  <div class="header-stats">
+    <div class="hstat"><b id="h-seances">0</b>séances</div>
+    <div class="hstat"><b id="h-dossiers">0</b>dossiers</div>
+  </div>
+</header>
+
+<div class="save-alert" id="save-alert">
+  <span style="font-size:20px">💾</span>
+  <span class="save-alert-text">Analyse non sauvegardée — exportez votre JSON et rangez-le dans iCloud Drive</span>
+  <button class="btn-save-pulse" onclick="exporterDonnees(true)">⬇ Sauvegarder JSON</button>
+  <button class="btn-ghost btn-sm" onclick="dismissSaveAlert()" style="margin-left:4px">✕</button>
+</div>
+
+<div id="apikey-bar" style="background:#fff;border:1px solid var(--border);border-radius:var(--radius-sm);padding:10px 16px;margin-bottom:12px;display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+  <span style="font-size:12px;font-weight:600;color:var(--text2);white-space:nowrap">🔑 Clé API Anthropic</span>
+  <input type="password" id="api-key-field" placeholder="sk-ant-…" style="flex:1;min-width:200px;font-family:monospace;font-size:12px" oninput="sauvegarderCle()">
+  <span style="font-size:11px;color:var(--text3)">Stockée localement · <a href="https://console.anthropic.com" target="_blank" style="color:var(--or)">console.anthropic.com</a></span>
+</div>
+<nav class="nav-tabs">
+  <button class="nav-tab active" onclick="showTab('importer',this)">📥 Importer</button>
+  <button class="nav-tab" onclick="showTab('interroger',this)">💬 Interroger</button>
+  <button class="nav-tab" onclick="showTab('recherche',this)">🔍 Recherche</button>
+  <button class="nav-tab" onclick="showTab('dossiers',this)">📁 Dossiers <span class="badge" id="badge-dossiers">0</span></button>
+  <button class="nav-tab" onclick="showTab('vivante',this)">🗳 Séance vivante</button>
+  <button class="nav-tab" onclick="showTab('fiche',this)">📄 Fiche</button>
+  <button class="nav-tab" onclick="showTab('historique',this)">🕐 Historique</button>
+  <button class="nav-tab" onclick="showTab('sync',this)">☁ Sync</button>
+</nav>
+
+<!-- ===== IMPORTER ===== -->
+<div class="tab-content active" id="tab-importer">
+  <div class="card">
+    <div class="card-title"><span class="dot"></span>Modèle d'analyse</div>
+    <div class="model-selector">
+      <div class="model-card model-haiku selected" id="mc-haiku" onclick="selectModel('haiku')">
+        <span class="mc-badge">⭐ Recommandé</span>
+        <div class="mc-name">Haiku 4.5</div>
+        <div class="mc-desc">Rapide · Séances courantes</div>
+        <div class="mc-price">1 $ / 5 $ par M tokens</div>
+      </div>
+      <div class="model-card model-sonnet" id="mc-sonnet" onclick="selectModel('sonnet')">
+        <div class="mc-name">Sonnet 4</div>
+        <div class="mc-desc">Puissant · Séances complexes</div>
+        <div class="mc-price">3 $ / 15 $ par M tokens</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="dot"></span>Charger un compte-rendu</div>
+    <div class="import-zone">
+      <div class="import-zone-title">📄 Fichier PDF ou texte</div>
+      <div class="import-zone-sub">Sélectionnez un fichier depuis votre ordinateur (.pdf ou .txt)</div>
+      <button class="btn btn-primary" onclick="document.getElementById('fileInput').click()">📂 Choisir un fichier</button>
+      <input type="file" id="fileInput" accept=".pdf,.txt" style="display:none" onchange="handleFile(event)">
+      <div class="file-preview" id="file-preview">
+        <span style="font-size:20px">📄</span>
+        <div class="file-info">
+          <div class="fname" id="file-name">—</div>
+          <div class="fmeta" id="file-meta">—</div>
+          <div class="pdf-progress" id="pdf-progress" style="display:none"><div class="pdf-progress-fill" id="pdf-fill"></div></div>
+        </div>
+        <span id="file-status" style="font-size:12px;color:var(--success);font-weight:500;flex-shrink:0"></span>
+      </div>
+    </div>
+    <div style="display:flex;gap:10px;margin-bottom:12px;flex-wrap:wrap">
+      <div style="flex:1;min-width:140px">
+        <label style="font-size:12px;color:var(--text2);font-weight:500;display:block;margin-bottom:5px">Date du conseil</label>
+        <input type="text" id="seance-date" placeholder="Ex : 15 mars 2026">
+      </div>
+      <div style="flex:2;min-width:180px">
+        <label style="font-size:12px;color:var(--text2);font-weight:500;display:block;margin-bottom:5px">Titre / Thème principal</label>
+        <input type="text" id="seance-titre" placeholder="Ex : Budget primitif 2026…">
+      </div>
+    </div>
+    <textarea id="seance-texte" style="display:none"></textarea>
+    <div style="margin-bottom:12px;display:flex;justify-content:space-between">
+      <span style="font-size:11px;color:var(--text3)" id="char-count"></span>
+      <span style="font-size:11px;color:var(--text3)" id="cost-estimate"></span>
+    </div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <button class="btn btn-or" onclick="lancerAnalyse()">✨ Analyser le conseil</button>
+      <button class="btn btn-ghost" onclick="clearImport()">✕ Effacer</button>
+    </div>
+  </div>
+
+  <!-- BARRE DE PROGRESSION -->
+  <div class="analyse-progress" id="analyse-progress">
+    <div class="analyse-progress-title">🔍 Analyse en cours…</div>
+    <div class="analyse-progress-bar-wrap"><div class="analyse-progress-bar" id="analyse-bar"></div></div>
+    <div class="analyse-progress-step" id="analyse-step">Initialisation…</div>
+    <div class="analyse-progress-log" id="analyse-log"></div>
+  </div>
+
+  <!-- RÉSULTATS -->
+  <div id="resultat-analyse" style="display:none">
+
+    <!-- RÉSUMÉ FINAL EN HAUT -->
+    <div class="resume-final" id="resume-final-block" style="display:none">
+      <h3>📋 Ce qu'il faut retenir de ce conseil</h3>
+      <div id="resume-final-content"></div>
+    </div>
+
+    <!-- DÉLIBÉRATIONS -->
+    <div class="card">
+      <div class="card-title"><span class="dot"></span>Délibérations analysées <span id="delib-count" style="font-weight:400;font-size:11px;color:var(--text3);margin-left:4px"></span></div>
+      <div id="res-deliberations"></div>
+    </div>
+
+    <!-- DOSSIERS SUGGÉRÉS -->
+    <div class="card" id="block-dossiers-suggeres" style="display:none">
+      <div class="card-title"><span class="dot"></span>Dossiers suggérés</div>
+      <div id="res-dossiers"></div>
+    </div>
+
+    <div style="display:flex;gap:8px;margin-bottom:18px;flex-wrap:wrap;align-items:center">
+      <button class="btn btn-primary" onclick="sauvegarderSeance()">💾 Sauvegarder la séance</button>
+      <button class="btn btn-ghost" onclick="clearResultats()">Effacer</button>
+      <span id="last-cost-badge" class="cost-line"></span>
+    </div>
+  </div>
+</div>
+
+<!-- ===== INTERROGER ===== -->
+<div class="tab-content" id="tab-interroger">
+  <div class="card">
+    <div class="card-title"><span class="dot"></span>Interroger l'ensemble des séances</div>
+    <div class="chat-area" id="chat-area">
+      <div class="empty-state"><div class="icon">💬</div><p>Posez une question sur vos conseils municipaux</p></div>
+    </div>
+    <div class="chat-input-row">
+      <input type="text" id="chat-input" placeholder="Votre question…" onkeydown="if(event.key==='Enter')sendChat()">
+      <button class="btn btn-or" onclick="sendChat()">Envoyer</button>
+      <button class="btn btn-ghost btn-sm" onclick="clearChat()">⟳</button>
+    </div>
+    <div style="display:flex;gap:6px;flex-wrap:wrap">
+      <button class="btn btn-ghost btn-sm" onclick="quickQ('Quels dossiers reviennent le plus souvent ?')">Dossiers récurrents</button>
+      <button class="btn btn-ghost btn-sm" onclick="quickQ('Quels sont les points sensibles les plus importants ?')">Points sensibles</button>
+      <button class="btn btn-ghost btn-sm" onclick="quickQ('Résume les angles politiques disponibles')">Angles politiques</button>
+      <button class="btn btn-ghost btn-sm" onclick="quickQ('Comment avons-nous voté sur les dernières séances ?')">Nos votes</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== RECHERCHE ===== -->
+<div class="tab-content" id="tab-recherche">
+  <div class="card">
+    <div class="card-title"><span class="dot"></span>Recherche dans les séances</div>
+    <div style="display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap">
+      <input type="text" id="search-input" placeholder="Mot-clé, thème…" style="flex:1;min-width:160px" oninput="rechercherSeances()">
+      <select id="search-filter" style="width:160px" onchange="rechercherSeances()">
+        <option value="">Tout type</option>
+        <option value="deliberation">Délibérations</option>
+        <option value="point-sensible">Points sensibles</option>
+        <option value="angle">Angles politiques</option>
+        <option value="dossier">Dossiers</option>
+        <option value="vote">Votes</option>
+      </select>
+    </div>
+    <div id="search-results"><div class="empty-state"><div class="icon">🔍</div><p>Saisissez un terme pour rechercher</p></div></div>
+  </div>
+</div>
+
+<!-- ===== DOSSIERS ===== -->
+<div class="tab-content" id="tab-dossiers">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+    <div style="font-family:'Syne',sans-serif;font-size:12px;font-weight:600;color:var(--text2);text-transform:uppercase;letter-spacing:.05em">Suivi des dossiers transversaux</div>
+    <button class="btn btn-primary btn-sm" onclick="ouvrirNouveauDossier()">+ Nouveau dossier</button>
+  </div>
+  <div id="dossiers-list"><div class="empty-state"><div class="icon">📁</div><p>Aucun dossier. Analysez des séances pour des suggestions automatiques.</p></div></div>
+</div>
+
+<!-- ===== SÉANCE VIVANTE ===== -->
+<div class="tab-content" id="tab-vivante">
+  <div class="card">
+    <div class="card-title"><span class="dot"></span>Sélectionner une séance à annoter</div>
+    <select id="vivante-select" onchange="chargerSeanceVivante()">
+      <option value="">— Choisissez une séance sauvegardée —</option>
+    </select>
+  </div>
+  <div id="vivante-content" style="display:none">
+    <div class="card">
+      <div class="card-title"><span class="dot"></span>Votes & échanges par délibération</div>
+      <div id="vivante-deliberations"></div>
+      <div style="margin-top:12px">
+        <button class="btn btn-or btn-sm" onclick="sauvegarderVivante()">💾 Sauvegarder les annotations</button>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title"><span class="dot"></span>Observations générales de séance</div>
+      <textarea id="vivante-obs" placeholder="Ambiance générale, incidents notables, comportements de la majorité…" style="min-height:90px"></textarea>
+    </div>
+  </div>
+</div>
+
+<!-- ===== FICHE ===== -->
+<div class="tab-content" id="tab-fiche">
+  <div class="card">
+    <div class="card-title"><span class="dot"></span>Générer une fiche de séance</div>
+    <div style="display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap;align-items:flex-end">
+      <div style="flex:1;min-width:180px">
+        <label style="font-size:12px;color:var(--text2);font-weight:500;display:block;margin-bottom:5px">Séance</label>
+        <select id="fiche-select"><option value="">— Choisissez une séance —</option></select>
+      </div>
+      <button class="btn btn-or" onclick="genererFicheAvant()">📋 Fiche avant séance</button>
+      <button class="btn btn-ghost" onclick="genererFicheApres()">📊 Synthèse après séance</button>
+    </div>
+  </div>
+  <div id="fiche-content" style="display:none">
+    <div id="fiche-rendu"></div>
+    <div style="display:flex;gap:8px;margin-bottom:18px">
+      <button class="btn-pdf" onclick="exportPDF()">⬇ Exporter PDF</button>
+      <button class="btn btn-ghost btn-sm" onclick="document.getElementById('fiche-content').style.display='none'">Fermer</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== HISTORIQUE ===== -->
+<div class="tab-content" id="tab-historique">
+  <div id="historique-list"><div class="empty-state"><div class="icon">🕐</div><p>Aucune séance analysée.</p></div></div>
+</div>
+
+<!-- ===== SYNC ===== -->
+<div class="tab-content" id="tab-sync">
+  <div class="card">
+    <div class="card-title"><span class="dot"></span>Sauvegarde iCloud Drive</div>
+    <div style="background:var(--or-pale);border:1px solid var(--or);border-radius:var(--radius-sm);padding:14px;margin-bottom:16px;font-size:13px;color:#7a5c00;line-height:1.7">
+      <strong>Flux recommandé :</strong> après chaque analyse → <em>Exporter JSON</em> → rangez dans iCloud Drive.<br>
+      Sur un autre appareil → <em>Importer JSON</em> depuis iCloud → toutes vos données sont restaurées.
+    </div>
+    <div class="sync-item">
+      <div><div class="sync-label">📤 Exporter toutes les données</div><div class="sync-meta-txt" id="sync-local-meta">Chargement…</div></div>
+      <button class="btn btn-or btn-sm" onclick="exporterDonnees(false)">Exporter JSON</button>
+    </div>
+    <div class="sync-item">
+      <div><div class="sync-label">📥 Importer une sauvegarde</div><div class="sync-meta-txt">Restaurer depuis un fichier JSON iCloud</div></div>
+      <button class="btn btn-ghost btn-sm" onclick="document.getElementById('importJson').click()">Importer JSON</button>
+      <input type="file" id="importJson" accept=".json" style="display:none" onchange="importerDonnees(event)">
+    </div>
+    <div class="sync-item">
+      <div><div class="sync-label">🗑 Réinitialiser</div><div class="sync-meta-txt">Supprime toutes les données locales</div></div>
+      <button class="btn btn-danger btn-sm" onclick="reinitialiser()">Réinitialiser</button>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title"><span class="dot"></span>Statistiques</div>
+    <div id="sync-stats" style="font-size:13px;color:var(--text2);line-height:2.2"></div>
+  </div>
+</div>
+
+</div>
+
+<!-- Modals -->
+<div class="modal-backdrop" id="modal-dossier">
+  <div class="modal">
+    <div class="modal-header"><h3>Nouveau dossier thématique</h3><button class="modal-close" onclick="fermerModal('modal-dossier')">✕</button></div>
+    <div class="modal-body">
+      <div style="margin-bottom:12px"><label style="font-size:12px;font-weight:500;color:var(--text2);display:block;margin-bottom:5px">Nom</label><input type="text" id="dossier-nom" placeholder="Ex : Urbanisme / PLU"></div>
+      <div style="margin-bottom:12px"><label style="font-size:12px;font-weight:500;color:var(--text2);display:block;margin-bottom:5px">Catégorie</label>
+        <select id="dossier-cat"><option>Finances & Budget</option><option>Urbanisme</option><option>Services publics</option><option>Environnement</option><option>Sécurité</option><option>Culture & Sport</option><option>Ressources humaines</option><option>Transparence</option><option>Autre</option></select>
+      </div>
+      <div style="margin-bottom:14px"><label style="font-size:12px;font-weight:500;color:var(--text2);display:block;margin-bottom:5px">Description</label><textarea id="dossier-desc" placeholder="Enjeux, historique, position du groupe…"></textarea></div>
+      <div style="display:flex;gap:8px"><button class="btn btn-or" onclick="creerDossier()">Créer</button><button class="btn btn-ghost" onclick="fermerModal('modal-dossier')">Annuler</button></div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-backdrop" id="modal-seance">
+  <div class="modal">
+    <div class="modal-header"><h3 id="modal-seance-titre">Détail séance</h3><button class="modal-close" onclick="fermerModal('modal-seance')">✕</button></div>
+    <div class="modal-body" id="modal-seance-body"></div>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script>
+const STORAGE_KEY='osny_v14';
+let db={seances:[],dossiers:[],journal:[],coutTotal:0};
+let currentAnalysis=null;
+let chatHistory=[];
+let selectedModel='haiku';
+let miniChats={};
+let totalCoutSession=0;
+
+const MODELS={
+  haiku:{id:'claude-haiku-4-5-20251001',label:'Haiku 4.5',priceIn:1,priceOut:5},
+  sonnet:{id:'claude-sonnet-4-20250514',label:'Sonnet 4',priceIn:3,priceOut:15}
+};
+
+if(typeof pdfjsLib!=='undefined')
+  pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+  // Fallback Safari local : si workerSrc échoue, on désactive le worker (mode compat)
+  pdfjsLib.GlobalWorkerOptions.workerSrc = typeof SharedArrayBuffer !== 'undefined'
+    ? 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js'
+    : ''  ;
+
+/* ── DB ── */
+function loadDB(){
+  try{const s=localStorage.getItem(STORAGE_KEY);if(s)db=JSON.parse(s);}catch(e){}
+  ['seances','dossiers','journal'].forEach(k=>{if(!Array.isArray(db[k]))db[k]=[];});
+  if(!db.coutTotal)db.coutTotal=0;
+}
+function saveDB(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify(db));}catch(e){toast('Stockage plein.');}}
+
+/* ── COÛTS ── */
+function calculerCout(tokIn,tokOut,model){
+  const m=MODELS[model]||MODELS.haiku;
+  return(tokIn/1e6)*m.priceIn+(tokOut/1e6)*m.priceOut;
+}
+function estimerTokens(txt){return Math.round(txt.length/3.8);}
+function ajouterCout(cout){
+  db.coutTotal=(db.coutTotal||0)+cout;
+  totalCoutSession+=cout;
+  saveDB();
+}
+function majEstimateCout(){
+  const txt=document.getElementById('seance-texte').value;
+  if(!txt){document.getElementById('cost-estimate').textContent='';return;}
+  const n=estimerTokens(txt);
+  // estimation : 1 appel extraction + N appels délibs + 1 résumé
+  const estDelibs=Math.round(n/800);
+  const cExt=calculerCout(n+800,600,selectedModel);
+  const cDelibs=estDelibs*calculerCout(2000,600,selectedModel);
+  const cResume=calculerCout(3000,800,selectedModel);
+  const total=cExt+cDelibs+cResume;
+  document.getElementById('cost-estimate').textContent=`~${total.toFixed(4)} $ · ~${estDelibs} délibs estimées`;
+}
+
+/* ── MODÈLE ── */
+function selectModel(m){
+  selectedModel=m;localStorage.setItem('osny_model',m);
+  document.querySelectorAll('.model-card').forEach(el=>el.classList.remove('selected'));
+  document.getElementById('mc-'+m).classList.add('selected');
+  majEstimateCout();
+}
+
+/* ── UI ── */
+function showTab(name,btn){
+  document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('tab-'+name).classList.add('active');
+  if(btn)btn.classList.add('active');
+  refreshViews(name);
+}
+function toast(msg,dur){
+  const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),dur||3000);
+}
+function ouvrirModal(id){document.getElementById(id).classList.add('open');}
+function fermerModal(id){document.getElementById(id).classList.remove('open');}
+function showSaveAlert(){document.getElementById('save-alert').classList.add('visible');}
+function dismissSaveAlert(){document.getElementById('save-alert').classList.remove('visible');}
+
+/* ── PROGRESS ── */
+function setProgress(pct,step){
+  document.getElementById('analyse-bar').style.width=pct+'%';
+  document.getElementById('analyse-step').textContent=step;
+}
+function addLog(msg,status){
+  const log=document.getElementById('analyse-log');
+  const div=document.createElement('div');
+  div.className='analyse-log-item '+(status||'');
+  div.innerHTML=(status==='done'?'✅ ':status==='active'?'⏳ ':'')+msg;
+  log.appendChild(div);
+  log.scrollTop=log.scrollHeight;
+  return div;
+}
+
+/* ── FICHIER ── */
+function handleFile(evt){
+  const f=evt.target.files[0];if(!f)return;
+  document.getElementById('file-name').textContent=f.name;
+  document.getElementById('file-meta').textContent=Math.round(f.size/1024)+'Ko';
+  document.getElementById('file-status').textContent='⏳';
+  document.getElementById('file-preview').classList.add('visible');
+  if(!document.getElementById('seance-date').value)document.getElementById('seance-date').value=new Date().toLocaleDateString('fr-FR');
+  if(!document.getElementById('seance-titre').value)document.getElementById('seance-titre').value=f.name.replace(/\.(pdf|txt)$/i,'').replace(/[-_]/g,' ');
+  if(f.name.toLowerCase().endsWith('.pdf')||f.type==='application/pdf')lirePDF(f);
+  else{const r=new FileReader();r.onload=ev=>{document.getElementById('seance-texte').value=ev.target.result;majCharCount();document.getElementById('file-status').textContent='✅';toast('Fichier chargé.');};r.readAsText(f,'UTF-8');}
+}
+async function lirePDF(file){
+  if(typeof pdfjsLib==='undefined'){toast('Lecteur PDF indisponible. Collez le texte manuellement.');document.getElementById('file-status').textContent='⚠';return;}
+  const prog=document.getElementById('pdf-progress'),fill=document.getElementById('pdf-fill');
+  prog.style.display='block';fill.style.width='8%';
+  try{
+    const buf=await file.arrayBuffer();fill.style.width='25%';
+    const pdf=await pdfjsLib.getDocument({data:buf}).promise;
+    const n=pdf.numPages;let txt='';
+    for(let i=1;i<=n;i++){const pg=await pdf.getPage(i);const ct=await pg.getTextContent();txt+=ct.items.map(it=>it.str).join(' ')+'\n';fill.style.width=Math.round(25+(i/n)*70)+'%';}
+    fill.style.width='100%';txt=txt.replace(/\s{3,}/g,' ').trim();
+    if(txt.length<80){document.getElementById('file-status').textContent='⚠';toast('PDF scanné — collez le texte manuellement.');}
+    else{document.getElementById('seance-texte').value=txt;majCharCount();document.getElementById('file-status').textContent='✅ '+n+'p';toast('PDF extrait : '+txt.length.toLocaleString('fr-FR')+' car.');}
+  }catch(e){document.getElementById('file-status').textContent='⚠';toast('Erreur PDF.');}
+  setTimeout(()=>prog.style.display='none',1000);
+}
+function majCharCount(){
+  const n=document.getElementById('seance-texte').value.length;
+  document.getElementById('char-count').textContent=n>0?n.toLocaleString('fr-FR')+' caractères':'';
+  majEstimateCout();
+}
+function clearImport(){
+  ['seance-texte','seance-date','seance-titre'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('fileInput').value='';
+  document.getElementById('file-preview').classList.remove('visible');
+  document.getElementById('char-count').textContent='';
+  document.getElementById('cost-estimate').textContent='';
+  clearResultats();
+}
+function clearResultats(){
+  document.getElementById('resultat-analyse').style.display='none';
+  document.getElementById('analyse-progress').classList.remove('visible');
+  currentAnalysis=null;miniChats={};
+}
+
+/* ── API ── */
+function getCle(){
+  return document.getElementById('api-key-field').value.trim()||localStorage.getItem('osny_apikey')||'';
+}
+function sauvegarderCle(){
+  const k=document.getElementById('api-key-field').value.trim();
+  if(k)localStorage.setItem('osny_apikey',k);
+}
+async function callClaude(system,messages,maxTokens){
+  const key=getCle();
+  if(!key||!key.startsWith('sk-'))throw new Error('Clé API manquante. Saisissez votre clé sk-ant-… dans le bandeau en haut.');
+  const model=MODELS[selectedModel];
+  const resp=await fetch('https://api.anthropic.com/v1/messages',{
+    method:'POST',
+    headers:{
+      'Content-Type':'application/json',
+      'x-api-key':key,
+      'anthropic-version':'2023-06-01',
+      'anthropic-dangerous-allow-browser':'true'
+    },
+    body:JSON.stringify({model:model.id,max_tokens:maxTokens||2000,system,messages})
+  });
+  if(!resp.ok){const err=await resp.json().catch(()=>({}));throw new Error((err.error&&err.error.message)||'Erreur API '+resp.status);}
+  const data=await resp.json();
+  if(data.usage){ajouterCout(calculerCout(data.usage.input_tokens||0,data.usage.output_tokens||0,selectedModel));}
+  return data;
+}
+function parseJSON(raw){
+  raw=raw.replace(/```json|```/g,'').trim();
+  const i0=raw.indexOf('{'),i1=raw.lastIndexOf('}');
+  if(i0>=0&&i1>i0)raw=raw.slice(i0,i1+1);
+  return JSON.parse(raw);
+}
+
+/* ══════════════════════════════════════════
+   NOUVELLE ARCHITECTURE D'ANALYSE
+   1. Extraction liste délibérations
+   2. Analyse individuelle de chaque délib
+   3. Résumé global final
+══════════════════════════════════════════ */
+async function lancerAnalyse(){
+  const texte=document.getElementById('seance-texte').value.trim();
+  const date=document.getElementById('seance-date').value.trim()||new Date().toLocaleDateString('fr-FR');
+  const titre=document.getElementById('seance-titre').value.trim()||'Séance sans titre';
+  if(!texte||texte.length<40){toast('⚠ Chargez un fichier PDF ou TXT.');return;}
+
+  document.getElementById('analyse-progress').classList.add('visible');
+  document.getElementById('resultat-analyse').style.display='none';
+  document.getElementById('analyse-log').innerHTML='';
+  totalCoutSession=0;
+  setProgress(5,'Étape 1 : extraction des délibérations…');
+
+  currentAnalysis={date,titre,texte:texte.substring(0,8000),deliberations:[],resume_global:'',dossiers_suggeres:[],votes:{},echanges:{},obs_generales:'',modele:MODELS[selectedModel].label};
+
+  try{
+    // ── ÉTAPE 1 : extraction liste des titres ──
+    const logExt=addLog('Extraction des délibérations…','active');
+    const r1=await callClaude(
+      `Extrais la liste COMPLÈTE de toutes les délibérations de ce compte-rendu de conseil municipal. Il peut y en avoir 5, 10, 15, 20 ou plus — liste-les TOUTES sans exception. Retourne UNIQUEMENT un JSON valide sans backticks ni markdown : {"deliberations":[{"numero":1,"titre":"Titre exact"},{"numero":2,"titre":"..."},...]}. Uniquement numéros et titres, rien d'autre.`,
+      [{role:'user',content:`Compte-rendu conseil municipal d'Osny du ${date} (${titre}) :\n\n${texte.substring(0,28000)}`}],
+      4000
+    );
+    let listeDelibs=[];
+    try{
+      const raw=(r1.content||[]).map(b=>b.text||'').join('');
+      listeDelibs=parseJSON(raw).deliberations||[];
+    }catch(e){}
+
+    if(!listeDelibs.length){
+      toast('⚠ Aucune délibération trouvée dans ce texte.',5000);
+      document.getElementById('analyse-progress').classList.remove('visible');
+      return;
+    }
+    logExt.className='analyse-log-item done';
+    logExt.textContent='✅ '+listeDelibs.length+' délibération(s) identifiée(s)';
+    setProgress(20,'Étape 2 : analyse en parallèle…');
+
+    // Afficher cartes squelettes
+    document.getElementById('resultat-analyse').style.display='block';
+    document.getElementById('delib-count').textContent='('+listeDelibs.length+')';
+    document.getElementById('res-deliberations').innerHTML=listeDelibs.map((_,i)=>
+      `<div id="delib-card-${i}" class="delib-card">
+        <div class="delib-card-header">
+          <div class="delib-num">${i+1}</div>
+          <div class="delib-header-body">
+            <div class="delib-title">Analyse en cours…</div>
+            <div class="delib-pills"><span class="pill pill-gray">⏳ En attente</span></div>
+          </div>
+        </div>
+      </div>`
+    ).join('');
+
+    // ── ÉTAPE 2 : analyse PARALLÈLE de toutes les délibérations ──
+    const sysDelib=`Tu es l'assistant politique du groupe "Osny Intensément", opposition constructive au conseil municipal d'Osny. Maire : Laurent Achite Henni ("Osny ensemble vers le futur"). Analyse la délibération demandée et retourne UNIQUEMENT un JSON valide sans backticks : {"titre":"...","enjeu":"...","position_recommandee":"pour|contre|abstention","explication_position":"...","proposition_action":"...","points_sensibles":[{"titre":"...","description":"...","niveau":"rouge|orange|vert"}],"angles_politiques":[{"titre":"...","description":"...","tag":"Budget|Urbanisme|Services|Transparence|RH|Sécurité|Autre"}]}`;
+
+    const logs=listeDelibs.map((d,i)=>addLog(`Délibération ${i+1}/${listeDelibs.length} : ${(d.titre||'').substring(0,45)}…`,'active'));
+
+    // Lancer tous les appels en parallèle avec Promise.allSettled
+    const promises=listeDelibs.map((d,i)=>
+      callClaude(sysDelib,[{role:'user',content:`Compte-rendu complet du conseil d'Osny du ${date}.\nAnalyse UNIQUEMENT la délibération n°${d.numero} intitulée : "${d.titre}".\n\nCompte-rendu :\n${texte.substring(0,26000)}`}],2000)
+      .then(data=>{
+        let resD;
+        try{resD=parseJSON((data.content||[]).map(b=>b.text||'').join(''));}
+        catch(e){resD={titre:d.titre||'Délibération '+(i+1),enjeu:'',position_recommandee:'abstention',explication_position:'',proposition_action:'',points_sensibles:[],angles_politiques:[]};}
+        logs[i].className='analyse-log-item done';
+        logs[i].textContent='✅ Délibération '+(i+1)+' : '+(resD.titre||'').substring(0,45);
+        // Mise à jour progress
+        const done=document.querySelectorAll('.analyse-log-item.done').length;
+        setProgress(20+Math.round((done/listeDelibs.length)*60),'Analyse en cours… '+done+'/'+listeDelibs.length);
+        return{index:i,data:resD};
+      })
+      .catch(e=>{
+        logs[i].className='analyse-log-item done';
+        logs[i].textContent='⚠ Délibération '+(i+1)+' : erreur';
+        return{index:i,data:{titre:d.titre||'Délibération '+(i+1),enjeu:'Erreur: '+e.message,position_recommandee:'abstention',explication_position:'',proposition_action:'',points_sensibles:[],angles_politiques:[]}};
+      })
+    );
+
+    const resultats=await Promise.allSettled(promises);
+
+    // Trier par index et peupler currentAnalysis
+    const analyses=resultats.map(r=>r.status==='fulfilled'?r.value:{index:0,data:{titre:'Erreur',enjeu:'',position_recommandee:'abstention',explication_position:'',proposition_action:'',points_sensibles:[],angles_politiques:[]}});
+    analyses.sort((a,b)=>a.index-b.index);
+    currentAnalysis.deliberations=analyses.map(a=>a.data);
+
+    // Rendre les cartes
+    currentAnalysis.deliberations.forEach((d,i)=>renderDelibCard(i,d));
+
+    // ── ÉTAPE 3 : résumé global ──
+    setProgress(85,'Étape 3 : résumé global…');
+    const logR=addLog('Génération du résumé global…','active');
+    const dossiersList=db.dossiers.map(d=>d.nom).join(', ')||'aucun';
+    const synthese=currentAnalysis.deliberations.map((d,i)=>`${i+1}. ${d.titre} — ${d.position_recommandee} — ${d.enjeu}`).join('\n');
+    try{
+      const r3=await callClaude(
+        `Tu es l'assistant du groupe "Osny Intensément". Génère un résumé stratégique de ce conseil et des suggestions de dossiers. Dossiers déjà suivis : ${dossiersList}. Retourne UNIQUEMENT un JSON sans backticks : {"resume_global":"...","points_a_retenir":["..."],"ligne_majoritaire":"...","dossiers_suggeres":[{"nom":"...","categorie":"Finances & Budget|Urbanisme|Services publics|Environnement|Sécurité|Culture & Sport|Ressources humaines|Transparence|Autre","lien":"..."}]}`,
+        [{role:'user',content:`Conseil d'Osny du ${date} — ${titre}\n\nDélibérations :\n${synthese}`}],
+        2000
+      );
+      let resR;
+      try{resR=parseJSON((r3.content||[]).map(b=>b.text||'').join(''));}
+      catch(e){resR={resume_global:'',points_a_retenir:[],ligne_majoritaire:'',dossiers_suggeres:[]};}
+      currentAnalysis.resume_global=resR.resume_global||'';
+      currentAnalysis.dossiers_suggeres=resR.dossiers_suggeres||[];
+      afficherResumeFinal(resR);
+      afficherDossiersSuggeres(resR.dossiers_suggeres||[]);
+      logR.className='analyse-log-item done';
+      logR.textContent='✅ Résumé global généré';
+    }catch(e){
+      logR.className='analyse-log-item done';
+      logR.textContent='⚠ Résumé : '+e.message;
+    }
+
+    setProgress(100,'✅ '+currentAnalysis.deliberations.length+' délibérations analysées');
+    document.getElementById('last-cost-badge').textContent='Coût : '+totalCoutSession.toFixed(4)+' $ · '+MODELS[selectedModel].label;
+    setTimeout(()=>document.getElementById('analyse-progress').classList.remove('visible'),2500);
+    showSaveAlert();
+
+  }catch(err){
+    document.getElementById('analyse-progress').classList.remove('visible');
+    toast('⚠ '+err.message,8000);
+  }
+}
+
+
+function renderDelibCard(i,d){
+  const card=document.getElementById('delib-card-'+i);
+  if(!card)return;
+  const voteClass=d.position_recommandee==='pour'?'pill-green':d.position_recommandee==='contre'?'pill-red':'pill-or';
+  const voteLabel=d.position_recommandee==='pour'?'✅ Pour':d.position_recommandee==='contre'?'❌ Contre':'⚪ Abstention';
+  card.innerHTML=`
+    <div class="delib-card-header" onclick="toggleDelib(${i})">
+      <div class="delib-num">${i+1}</div>
+      <div class="delib-header-body">
+        <div class="delib-title">${d.titre||'Délibération '+(i+1)}</div>
+        <div class="delib-pills">
+          <span class="pill ${voteClass}">${voteLabel}</span>
+          ${(d.points_sensibles||[]).length?`<span class="pill pill-or">⚠ ${d.points_sensibles.length} point(s)</span>`:''}
+          ${(d.angles_politiques||[]).length?`<span class="pill pill-marine">🎯 ${d.angles_politiques.length} angle(s)</span>`:''}
+        </div>
+      </div>
+      <span style="color:var(--text3);font-size:18px;margin-left:8px">▾</span>
+    </div>
+    <div class="delib-body" id="delib-body-${i}">
+      <div class="delib-section">
+        <div class="delib-section-label">⚡ Enjeu</div>
+        <div class="delib-section-content">${d.enjeu||'—'}</div>
+      </div>
+      <div class="delib-section">
+        <div class="delib-section-label">🎯 Position recommandée · ${voteLabel}</div>
+        <div class="delib-section-content ${d.position_recommandee==='contre'?'rouge':d.position_recommandee==='pour'?'vert':'orange'}">${d.explication_position||'—'}</div>
+      </div>
+      <div class="delib-section">
+        <div class="delib-section-label">💡 Proposition d'action de l'opposition</div>
+        <div class="delib-section-content">${d.proposition_action||'—'}</div>
+      </div>
+      ${(d.points_sensibles||[]).length?`<div class="delib-section">
+        <div class="delib-section-label">⚠ Points sensibles</div>
+        ${d.points_sensibles.map(p=>`<div class="ps-item ${p.niveau||''}"><strong>${p.titre}</strong><br><span style="font-size:12px">${p.description}</span></div>`).join('')}
+      </div>`:''}
+      ${(d.angles_politiques||[]).length?`<div class="delib-section">
+        <div class="delib-section-label">🎯 Angles politiques</div>
+        ${d.angles_politiques.map(a=>`<div class="angle-mini"><div class="angle-mini-tag">${a.tag}</div><div class="angle-mini-title">${a.titre}</div><div class="angle-mini-desc">${a.description}</div></div>`).join('')}
+      </div>`:''}
+      <div class="delib-section">
+        <button class="btn btn-ghost btn-sm" onclick="toggleChatMini(${i})">💬 Approfondir avec Claude</button>
+        <div class="chat-mini" id="chat-mini-${i}">
+          <div class="chat-mini-msgs" id="chat-mini-msgs-${i}"></div>
+          <div class="chat-mini-input">
+            <input type="text" id="chat-mini-input-${i}" placeholder="Votre question sur cette délibération…" onkeydown="if(event.key==='Enter')sendMiniChat(${i})">
+            <button class="chat-mini-send" onclick="sendMiniChat(${i})">↵</button>
+          </div>
+          <div style="display:flex;gap:5px;flex-wrap:wrap;margin-top:8px">
+            <button class="quickq-btn" onclick="quickMiniQ(${i},'Rédige une intervention de 3 phrases pour le conseil')">Intervention</button>
+            <button class="quickq-btn" onclick="quickMiniQ(${i},'Quelle question précise poser au maire sur ce sujet ?')">Question au maire</button>
+            <button class="quickq-btn" onclick="quickMiniQ(${i},'Propose une alternative constructive à cette délibération')">Alternative</button>
+            <button class="quickq-btn" onclick="quickMiniQ(${i},'Quels chiffres ou références citer pour renforcer notre position ?')">Chiffres & références</button>
+          </div>
+        </div>
+      </div>
+    </div>`;
+  if(!miniChats[i])miniChats[i]=[];
+}
+
+function toggleDelib(i){
+  const body=document.getElementById('delib-body-'+i);
+  if(body)body.classList.toggle('open');
+}
+
+function afficherResumeFinal(r){
+  const block=document.getElementById('resume-final-block');
+  const content=document.getElementById('resume-final-content');
+  block.style.display='block';
+  content.innerHTML=`
+    <p style="font-size:13.5px;color:rgba(255,255,255,.88);line-height:1.7;margin-bottom:12px">${r.resume_global||''}</p>
+    ${r.ligne_majoritaire?`<div class="resume-section"><div class="resume-section-label">Ligne de la majorité</div><div class="resume-item">${r.ligne_majoritaire}</div></div>`:''}
+    ${(r.points_a_retenir&&r.points_a_retenir.length)?`<div class="resume-section"><div class="resume-section-label">Points à retenir</div>${r.points_a_retenir.map(p=>`<div class="resume-item">• ${p}</div>`).join('')}</div>`:''}`;
+  block.scrollIntoView({behavior:'smooth'});
+}
+
+function afficherDossiersSuggeres(dossiers){
+  if(!dossiers||!dossiers.length)return;
+  document.getElementById('block-dossiers-suggeres').style.display='block';
+  document.getElementById('res-dossiers').innerHTML=dossiers.map(d=>`
+    <div class="dossier-suggere">
+      <div>
+        <div style="font-size:13px;font-weight:500;color:var(--text)">${d.nom}</div>
+        <div style="font-size:11.5px;color:var(--text2);margin-top:2px">${d.lien||''}</div>
+        <span class="pill pill-marine" style="margin-top:5px">${d.categorie}</span>
+      </div>
+      <button class="btn btn-ghost btn-sm" onclick="creerDossierDepuisAnalyse('${esc(d.nom)}','${esc(d.categorie)}','${esc(d.lien)}')">+ Créer</button>
+    </div>`).join('');
+}
+
+/* ── MINI CHAT ── */
+function toggleChatMini(i){
+  const el=document.getElementById('chat-mini-'+i);
+  const isOpen=el.classList.contains('open');
+  document.querySelectorAll('.chat-mini').forEach(c=>c.classList.remove('open'));
+  if(!isOpen)el.classList.add('open');
+}
+async function sendMiniChat(i){
+  const inp=document.getElementById('chat-mini-input-'+i);
+  const q=inp.value.trim();if(!q)return;inp.value='';
+  const d=currentAnalysis&&currentAnalysis.deliberations?currentAnalysis.deliberations[i]:null;
+  const ctx=d?`Délibération : "${d.titre}"\nEnjeu : ${d.enjeu||'—'}\nPosition recommandée : ${d.position_recommandee}\nExplication : ${d.explication_position||'—'}\nProposition d'action : ${d.proposition_action||'—'}\nPoints sensibles : ${(d.points_sensibles||[]).map(p=>p.titre).join(', ')||'—'}\n\nContexte : séance du ${currentAnalysis&&currentAnalysis.date} — ${currentAnalysis&&currentAnalysis.titre}`:'Conseil municipal d\'Osny';
+  addMiniMsg(i,q,'user');
+  const think=addMiniMsg(i,'…','ai');
+  if(!miniChats[i])miniChats[i]=[];
+  miniChats[i].push({role:'user',content:q});
+  const sys=`Tu es l'assistant politique du groupe "Osny Intensément", opposition constructive au conseil municipal d'Osny. Tu aides à préparer les interventions. Sois précis, factuel, constructif. Jamais agressif. Contexte de la délibération :\n${ctx}`;
+  try{
+    const data=await callClaude(sys,miniChats[i],1500);
+    const ans=(data.content||[]).map(b=>b.text||'').join('')||'Erreur.';
+    think.textContent=ans;
+    miniChats[i].push({role:'assistant',content:ans});
+  }catch(e){think.textContent='⚠ '+e.message;}
+  const msgs=document.getElementById('chat-mini-msgs-'+i);if(msgs)msgs.scrollTop=msgs.scrollHeight;
+}
+function addMiniMsg(i,txt,role){
+  const cont=document.getElementById('chat-mini-msgs-'+i);if(!cont)return{textContent:''};
+  const d=document.createElement('div');
+  d.className=role==='user'?'cmsg-user':'cmsg-ai';
+  d.textContent=txt;
+  cont.appendChild(d);cont.scrollTop=cont.scrollHeight;return d;
+}
+function quickMiniQ(i,q){document.getElementById('chat-mini-input-'+i).value=q;sendMiniChat(i);}
+
+/* ── SAUVEGARDER ── */
+function esc(s){return(s||'').replace(/\\/g,'\\\\').replace(/'/g,"\\'");}
+function creerDossierDepuisAnalyse(nom,cat,desc){
+  if(db.dossiers.find(d=>d.nom===nom)){toast('Dossier déjà existant.');return;}
+  db.dossiers.push({id:Date.now(),nom,categorie:cat,description:desc,createdAt:new Date().toISOString()});
+  saveDB();updateBadges();toast('Dossier "'+nom+'" créé.');
+}
+function sauvegarderSeance(){
+  if(!currentAnalysis){toast('Aucune analyse à sauvegarder.');return;}
+  db.seances.push({id:Date.now(),...currentAnalysis,savedAt:new Date().toISOString()});
+  saveDB();updateBadges();updateSelects();
+  toast('Séance sauvegardée.');dismissSaveAlert();clearImport();
+}
+
+/* ── CHAT GÉNÉRAL ── */
+async function sendChat(){
+  const inp=document.getElementById('chat-input');
+  const q=inp.value.trim();if(!q)return;inp.value='';
+  addChatBubble(q,'user');
+  const ctx=db.seances.map(s=>`SÉANCE ${s.date} (${s.titre}): ${s.resume_global||s.resume||''} — Délibérations: ${(s.deliberations||[]).map((d,i)=>`${d.titre} [vote:${(s.votes||{})[i]||'non saisi'}]`).join(', ')}`).join('\n\n');
+  const sys=`Tu es l'assistant du groupe "Osny Intensément". Données de séances:\n${ctx||'Aucune séance.'}`;
+  chatHistory.push({role:'user',content:q});
+  const thinkEl=addChatBubble('…','ai');
+  try{
+    const data=await callClaude(sys,chatHistory,2000);
+    const ans=(data.content||[]).map(b=>b.text||'').join('')||'Erreur.';
+    thinkEl.querySelector('.bubble').innerHTML=ans.replace(/\n/g,'<br>').replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>');
+    chatHistory.push({role:'assistant',content:ans});
+  }catch(e){thinkEl.querySelector('.bubble').textContent='⚠ '+e.message;}
+  scrollChat();
+}
+function addChatBubble(txt,role){
+  const ca=document.getElementById('chat-area');
+  if(ca.querySelector('.empty-state'))ca.innerHTML='';
+  const d=document.createElement('div');d.className='chat-msg '+role;
+  d.innerHTML=(role==='user'?'<div class="chat-sender right">Vous</div>':'<div class="chat-sender">Claude · Osny IA</div>')+`<div class="bubble">${txt}</div>`;
+  ca.appendChild(d);scrollChat();return d;
+}
+function scrollChat(){const ca=document.getElementById('chat-area');ca.scrollTop=ca.scrollHeight;}
+function clearChat(){document.getElementById('chat-area').innerHTML='<div class="empty-state"><div class="icon">💬</div><p>Conversation réinitialisée.</p></div>';chatHistory=[];}
+function quickQ(q){document.getElementById('chat-input').value=q;sendChat();}
+
+/* ── RECHERCHE ── */
+function rechercherSeances(){
+  const q=document.getElementById('search-input').value.toLowerCase().trim();
+  const filtre=document.getElementById('search-filter').value;
+  const cont=document.getElementById('search-results');
+  if(!q){cont.innerHTML='<div class="empty-state"><div class="icon">🔍</div><p>Saisissez un terme</p></div>';return;}
+  let results=[];
+  db.seances.forEach(s=>{
+    const fields=[
+      {type:'deliberation',text:(s.resume_global||s.resume||''),label:'Résumé global'},
+      ...(s.deliberations||[]).map(d=>({type:'deliberation',text:(d.titre+' '+d.enjeu+' '+d.proposition_action),label:'Délib : '+d.titre})),
+      ...(s.deliberations||[]).flatMap(d=>(d.points_sensibles||[]).map(p=>({type:'point-sensible',text:p.titre+' '+p.description,label:'Point : '+p.titre}))),
+      ...(s.deliberations||[]).flatMap(d=>(d.angles_politiques||[]).map(a=>({type:'angle',text:a.titre+' '+a.description,label:'Angle : '+a.titre}))),
+      ...Object.entries(s.votes||{}).map(([k,v])=>({type:'vote',text:((s.deliberations||[])[k]||{}).titre+' '+v,label:'Vote : '+v}))
+    ];
+    fields.forEach(f=>{if(f.text&&(!filtre||f.type===filtre)&&f.text.toLowerCase().includes(q))results.push({titre:f.label,ctx:f.text.substring(0,110),ref:s.date+' · '+s.titre});});
+  });
+  db.dossiers.forEach(d=>{if((!filtre||filtre==='dossier')&&(d.nom+' '+(d.description||'')).toLowerCase().includes(q))results.push({titre:'Dossier : '+d.nom,ctx:d.description||'',ref:'Dossier'});});
+  if(!results.length){cont.innerHTML='<div class="empty-state"><div class="icon">🔍</div><p>Aucun résultat pour "'+q+'"</p></div>';return;}
+  cont.innerHTML=`<div style="font-size:12px;color:var(--text3);margin-bottom:10px">${results.length} résultat(s)</div>`+results.map(r=>`<div class="search-result"><div style="display:flex;justify-content:space-between;margin-bottom:3px"><div style="font-size:13px;font-weight:500">${r.titre}</div><div style="font-size:11px;color:var(--text3)">${r.ref}</div></div><div style="font-size:12px;color:var(--text2)">${hl(r.ctx,q)}</div></div>`).join('');
+}
+function hl(txt,q){return(txt||'').replace(new RegExp('('+q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+')','gi'),'<span class="search-highlight">$1</span>');}
+
+/* ── DOSSIERS ── */
+function ouvrirNouveauDossier(){document.getElementById('dossier-nom').value='';document.getElementById('dossier-desc').value='';ouvrirModal('modal-dossier');}
+function creerDossier(){
+  const nom=document.getElementById('dossier-nom').value.trim();
+  if(!nom){toast('Nommez le dossier.');return;}
+  if(db.dossiers.find(d=>d.nom===nom)){toast('Dossier déjà existant.');return;}
+  db.dossiers.push({id:Date.now(),nom,categorie:document.getElementById('dossier-cat').value,description:document.getElementById('dossier-desc').value.trim(),createdAt:new Date().toISOString()});
+  saveDB();updateBadges();fermerModal('modal-dossier');renderDossiers();toast('Dossier créé.');
+}
+function renderDossiers(){
+  const cont=document.getElementById('dossiers-list');
+  if(!db.dossiers.length){cont.innerHTML='<div class="empty-state"><div class="icon">📁</div><p>Aucun dossier.</p></div>';return;}
+  const icons={'Finances & Budget':'💰','Urbanisme':'🏗','Services publics':'🏛','Environnement':'🌿','Sécurité':'🛡','Culture & Sport':'🎭','Ressources humaines':'👥','Transparence':'🔍','Autre':'📌'};
+  cont.innerHTML=db.dossiers.map(d=>`<div class="dossier-card"><div class="dossier-icon">${icons[d.categorie]||'📌'}</div><div class="dossier-body"><div class="dossier-title">${d.nom}</div><div class="dossier-meta-txt">${d.categorie} · ${new Date(d.createdAt).toLocaleDateString('fr-FR')}</div>${d.description?`<div style="font-size:12px;color:var(--text2);margin-top:3px;line-height:1.5">${d.description}</div>`:''}</div><button class="btn btn-danger btn-sm" onclick="supprimerDossier(${d.id})">✕</button></div>`).join('');
+}
+function supprimerDossier(id){if(!confirm('Supprimer ?'))return;db.dossiers=db.dossiers.filter(d=>d.id!==id);saveDB();updateBadges();renderDossiers();toast('Dossier supprimé.');}
+
+/* ── SÉANCE VIVANTE ── */
+function chargerSeanceVivante(){
+  const id=parseInt(document.getElementById('vivante-select').value);
+  if(!id){document.getElementById('vivante-content').style.display='none';return;}
+  const s=db.seances.find(x=>x.id===id);if(!s)return;
+  document.getElementById('vivante-content').style.display='block';
+  document.getElementById('vivante-obs').value=s.obs_generales||'';
+  const cont=document.getElementById('vivante-deliberations');
+  if(!s.deliberations||!s.deliberations.length){cont.innerHTML='<div class="empty-state" style="padding:16px"><p>Aucune délibération dans cette séance.</p></div>';return;}
+  cont.innerHTML=s.deliberations.map((d,i)=>{
+    const vote=(s.votes||{})[i]||'';
+    const echanges=(s.echanges||{})[i]||[];
+    return`<div class="vivante-delib">
+      <div class="vivante-delib-title">${i+1}. ${d.titre||'Délibération '+(i+1)}</div>
+      <div style="font-size:12px;color:var(--text2);margin-bottom:10px">${d.enjeu||''}</div>
+      <div style="font-size:12px;font-weight:600;color:var(--text2);margin-bottom:6px">Notre vote effectif :</div>
+      <div class="vote-select">
+        <button class="vote-btn pour ${vote==='pour'?'active':''}" onclick="setVote(${id},${i},'pour',this)">✅ Pour</button>
+        <button class="vote-btn contre ${vote==='contre'?'active':''}" onclick="setVote(${id},${i},'contre',this)">❌ Contre</button>
+        <button class="vote-btn abstention ${vote==='abstention'?'active':''}" onclick="setVote(${id},${i},'abstention',this)">⚪ Abstention</button>
+      </div>
+      <div style="font-size:12px;font-weight:600;color:var(--text2);margin:10px 0 6px">Échanges en séance :</div>
+      <div id="echanges-${id}-${i}">
+        ${echanges.map((e,j)=>`<div class="echange-item"><span class="echange-auteur">${e.auteur}</span><span style="flex:1">${e.texte}</span><button onclick="supprimerEchange(${id},${i},${j})" style="background:none;border:none;cursor:pointer;color:var(--text3);font-size:11px">✕</button></div>`).join('')}
+      </div>
+      <div style="display:flex;gap:6px;margin-top:8px;flex-wrap:wrap">
+        <select id="auteur-${id}-${i}" style="width:130px;font-size:12px;padding:5px 8px">
+          <option>Osny Intensément</option><option>Majorité</option><option>Maire</option><option>Autre élu</option>
+        </select>
+        <input type="text" id="echange-input-${id}-${i}" placeholder="Propos tenu en séance…" style="flex:1;min-width:160px;font-size:12px" onkeydown="if(event.key==='Enter')ajouterEchange(${id},${i})">
+        <button class="btn btn-ghost btn-sm" onclick="ajouterEchange(${id},${i})">+ Ajouter</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+function setVote(seanceId,delibIdx,vote,btn){
+  const s=db.seances.find(x=>x.id===seanceId);if(!s)return;
+  if(!s.votes)s.votes={};s.votes[delibIdx]=vote;
+  btn.closest('.vote-select').querySelectorAll('.vote-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');saveDB();toast('Vote enregistré.');
+}
+function ajouterEchange(seanceId,delibIdx){
+  const s=db.seances.find(x=>x.id===seanceId);if(!s)return;
+  const input=document.getElementById(`echange-input-${seanceId}-${delibIdx}`);
+  const auteur=document.getElementById(`auteur-${seanceId}-${delibIdx}`).value;
+  const texte=input.value.trim();if(!texte)return;
+  if(!s.echanges)s.echanges={};if(!s.echanges[delibIdx])s.echanges[delibIdx]=[];
+  s.echanges[delibIdx].push({auteur,texte,ts:Date.now()});
+  saveDB();input.value='';chargerSeanceVivante();
+}
+function supprimerEchange(seanceId,delibIdx,j){
+  const s=db.seances.find(x=>x.id===seanceId);if(!s)return;
+  s.echanges[delibIdx].splice(j,1);saveDB();chargerSeanceVivante();
+}
+function sauvegarderVivante(){
+  const id=parseInt(document.getElementById('vivante-select').value);if(!id)return;
+  const s=db.seances.find(x=>x.id===id);if(!s)return;
+  s.obs_generales=document.getElementById('vivante-obs').value;
+  saveDB();toast('Annotations sauvegardées.');showSaveAlert();
+}
+
+/* ── FICHE ── */
+async function genererFicheAvant(){
+  const id=parseInt(document.getElementById('fiche-select').value);
+  if(!id){toast('Choisissez une séance.');return;}
+  const s=db.seances.find(x=>x.id===id);if(!s)return;
+  const sys=`Tu es l'assistant du groupe "Osny Intensément". Génère une fiche de préparation AVANT SÉANCE, concise (1 page). Inclure : titre, date, résumé stratégique court, tableau des délibérations avec position recommandée + argument en 1 phrase, points d'attention prioritaires. Ton professionnel. Texte structuré prêt à imprimer, pas de JSON.`;
+  const content=`Séance du ${s.date} — ${s.titre}\nRésumé : ${s.resume_global||''}\nDélibérations : ${(s.deliberations||[]).map((d,i)=>`${i+1}. ${d.titre} | Position : ${d.position_recommandee} | ${d.explication_position||''}`).join('\n')}`;
+  await genererEtAfficherFiche(sys,content,s,'FICHE AVANT SÉANCE');
+}
+async function genererFicheApres(){
+  const id=parseInt(document.getElementById('fiche-select').value);
+  if(!id){toast('Choisissez une séance.');return;}
+  const s=db.seances.find(x=>x.id===id);if(!s)return;
+  const votesStr=Object.entries(s.votes||{}).map(([i,v])=>{const d=(s.deliberations||[])[i];return`${d?d.titre:'Délib. '+(parseInt(i)+1)} : ${v}`;}).join('\n')||'Non renseignés';
+  const echangesStr=Object.entries(s.echanges||{}).map(([i,ex])=>{const d=(s.deliberations||[])[i];return`${d?d.titre:'Délib. '+(parseInt(i)+1)} :\n${ex.map(e=>`  [${e.auteur}] ${e.texte}`).join('\n')}`;}).join('\n\n')||'Non renseignés';
+  const sys=`Tu es l'assistant du groupe "Osny Intensément". Génère une SYNTHÈSE APRÈS SÉANCE, concise (1 page). Inclure : résumé de la séance, nos votes, échanges notables, points à retenir, actions à mener. Ton neutre et factuel, utile pour partager avec l'équipe. Texte structuré, pas de JSON.`;
+  const content=`Séance du ${s.date} — ${s.titre}\nRésumé : ${s.resume_global||''}\nNos votes :\n${votesStr}\nÉchanges :\n${echangesStr}\nObservations : ${s.obs_generales||'—'}`;
+  await genererEtAfficherFiche(sys,content,s,'SYNTHÈSE APRÈS SÉANCE');
+}
+async function genererEtAfficherFiche(sys,content,s,type){
+  document.getElementById('fiche-content').style.display='none';
+  const loadTxt=document.createElement('div');loadTxt.style.cssText='text-align:center;padding:20px;color:var(--text3);font-size:13px';loadTxt.textContent='Génération en cours…';
+  document.getElementById('fiche-content').insertAdjacentElement('beforebegin',loadTxt);
+  try{
+    const data=await callClaude(sys,[{role:'user',content}],2000);
+    loadTxt.remove();
+    const txt=(data.content||[]).map(b=>b.text||'').join('');
+    document.getElementById('fiche-content').style.display='block';
+    document.getElementById('fiche-rendu').innerHTML=`
+      <div id="fiche-print-zone" style="background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:28px 32px;margin-bottom:14px">
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:18px;padding-bottom:14px;border-bottom:2px solid var(--marine)">
+          <div>
+            <div style="font-family:'Syne',sans-serif;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--or);margin-bottom:3px">${type}</div>
+            <div style="font-family:'Syne',sans-serif;font-size:18px;font-weight:700;color:var(--marine)">${s.titre||''}</div>
+            <div style="font-size:12px;color:var(--text3);margin-top:3px">📅 ${s.date} · Conseil Municipal d'Osny (95)</div>
+          </div>
+          <div style="text-align:right">
+            <div style="font-family:'Syne',sans-serif;font-size:11px;font-weight:600;color:var(--marine)">Osny Intensément</div>
+            <div style="font-size:11px;color:var(--text3)">Groupe d'opposition</div>
+          </div>
+        </div>
+        <div style="font-size:13.5px;line-height:1.8;color:var(--text);white-space:pre-line">${txt}</div>
+        <div style="margin-top:20px;padding-top:12px;border-top:1px solid var(--border);font-size:11px;color:var(--text3);display:flex;justify-content:space-between">
+          <span>Document confidentiel · Groupe Osny Intensément</span>
+          <span>Généré le ${new Date().toLocaleDateString('fr-FR')}</span>
+        </div>
+      </div>`;
+    document.getElementById('fiche-content').scrollIntoView({behavior:'smooth'});
+  }catch(e){loadTxt.remove();toast('⚠ '+e.message,5000);}
+}
+function exportPDF(){
+  const zone=document.getElementById('fiche-print-zone');if(!zone)return;
+  const win=window.open('','_blank');
+  win.document.write(`<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Fiche Osny Intensément</title><link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet"><style>*{margin:0;padding:0;box-sizing:border-box}body{font-family:'DM Sans',sans-serif;padding:20px;color:#1a2744}@media print{body{padding:0}}</style></head><body>${zone.outerHTML}<script>window.onload=function(){window.print();window.close();}<\/script></body></html>`);
+  win.document.close();
+}
+
+/* ── HISTORIQUE ── */
+function renderHistorique(){
+  const cont=document.getElementById('historique-list');
+  if(!db.seances.length){cont.innerHTML='<div class="empty-state"><div class="icon">🕐</div><p>Aucune séance analysée.</p></div>';return;}
+  cont.innerHTML=[...db.seances].reverse().map(s=>{
+    const votesCount=Object.keys(s.votes||{}).length;
+    const echangesCount=Object.values(s.echanges||{}).reduce((a,arr)=>a+arr.length,0);
+    return`<div class="seance-card" onclick="voirSeance(${s.id})">
+      <div style="display:flex;align-items:flex-start;justify-content:space-between">
+        <div><div class="seance-date-lbl">📅 ${s.date}${s.modele?' · '+s.modele:''}</div><div class="seance-title-lbl">${s.titre}</div></div>
+        <button class="btn btn-danger btn-sm" onclick="event.stopPropagation();supprimerSeance(${s.id})">✕</button>
+      </div>
+      <div class="seance-meta">
+        ${(s.deliberations||[]).length?`<span class="pill pill-marine">📋 ${s.deliberations.length} délib.</span>`:''}
+        ${votesCount?`<span class="pill pill-green">🗳 ${votesCount} votes</span>`:''}
+        ${echangesCount?`<span class="pill pill-blue">💬 ${echangesCount} échanges</span>`:''}
+      </div>
+      ${s.resume_global?`<div class="seance-excerpt">${s.resume_global.substring(0,180)}…</div>`:''}
+    </div>`;
+  }).join('');
+}
+function voirSeance(id){
+  const s=db.seances.find(x=>x.id===id);if(!s)return;
+  document.getElementById('modal-seance-titre').textContent=s.date+' · '+s.titre;
+  const votes=s.votes||{},echanges=s.echanges||{};
+  document.getElementById('modal-seance-body').innerHTML=`
+    <div style="font-size:14px;line-height:1.7;background:var(--bg);border-radius:8px;padding:14px;margin-bottom:14px;border-left:3px solid var(--or)">${s.resume_global||''}</div>
+    <div style="font-family:'Syne',sans-serif;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--text2);margin-bottom:8px">Délibérations & votes</div>
+    ${(s.deliberations||[]).map((d,i)=>`<div style="background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:10px 12px;margin-bottom:8px">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:4px">
+        <strong style="font-size:13px">${i+1}. ${d.titre}</strong>
+        ${votes[i]?`<span class="pill ${votes[i]==='pour'?'pill-green':votes[i]==='contre'?'pill-red':'pill-or'}">${votes[i]==='pour'?'✅ Pour':votes[i]==='contre'?'❌ Contre':'⚪ Abstention'}</span>`:'<span class="pill pill-gray">Vote non saisi</span>'}
+      </div>
+      <div style="font-size:12px;color:var(--text2)">${d.enjeu||''}</div>
+      ${(echanges[i]&&echanges[i].length)?'<div style="margin-top:8px;border-top:1px solid var(--border);padding-top:8px">'+echanges[i].map(e=>`<div style="font-size:12px;padding:3px 0"><strong style="color:var(--marine)">[${e.auteur}]</strong> ${e.texte}</div>`).join('')+'</div>':''}
+    </div>`).join('')}
+    ${s.obs_generales?`<div style="font-size:13px;background:var(--bg);padding:10px;border-radius:var(--radius-sm);margin-top:4px"><strong>Observations :</strong> ${s.obs_generales}</div>`:''}`;
+  ouvrirModal('modal-seance');
+}
+function supprimerSeance(id){if(!confirm('Supprimer ?'))return;db.seances=db.seances.filter(s=>s.id!==id);saveDB();updateBadges();updateSelects();renderHistorique();toast('Séance supprimée.');}
+
+/* ── SYNC ── */
+function exporterDonnees(avecAlert){
+  const blob=new Blob([JSON.stringify(db,null,2)],{type:'application/json'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);
+  a.download='osny_notes_'+new Date().toISOString().slice(0,10)+'.json';a.click();
+  toast('JSON exporté — rangez-le dans iCloud Drive.');
+  if(avecAlert)dismissSaveAlert();
+}
+function importerDonnees(evt){const f=evt.target.files[0];if(!f)return;const r=new FileReader();r.onload=ev=>{try{const d=JSON.parse(ev.target.result);if(d.seances&&Array.isArray(d.seances)){db=d;saveDB();location.reload();}else toast('JSON non reconnu.');}catch(e){toast('Erreur JSON.');}};r.readAsText(f);}
+function reinitialiser(){if(confirm('Réinitialiser ? Irréversible.')){localStorage.removeItem(STORAGE_KEY);localStorage.removeItem('osny_model');location.reload();}}
+function renderSync(){
+  const size=Math.round(JSON.stringify(db).length/1024);
+  document.getElementById('sync-local-meta').textContent=`${db.seances.length} séance(s) · ${db.dossiers.length} dossier(s) · ~${size}Ko`;
+  const delibs=(db.seances||[]).reduce((a,s)=>a+(s.deliberations||[]).length,0);
+  const votes=(db.seances||[]).reduce((a,s)=>a+Object.keys(s.votes||{}).length,0);
+  const echanges=(db.seances||[]).reduce((a,s)=>a+Object.values(s.echanges||{}).reduce((b,arr)=>b+arr.length,0),0);
+  const last=db.seances.length?new Date(Math.max(...db.seances.map(s=>new Date(s.savedAt||0)))).toLocaleString('fr-FR'):'—';
+  document.getElementById('sync-stats').innerHTML=`Séances analysées : <strong>${db.seances.length}</strong><br>Délibérations suivies : <strong>${delibs}</strong><br>Votes enregistrés : <strong>${votes}</strong><br>Échanges notés : <strong>${echanges}</strong><br>Dossiers ouverts : <strong>${db.dossiers.length}</strong><br>Coût API cumulé : <strong>${(db.coutTotal||0).toFixed(4)} $</strong><br>Dernière séance : <strong>${last}</strong>`;
+}
+
+/* ── GLOBAL ── */
+function updateBadges(){
+  document.getElementById('badge-dossiers').textContent=db.dossiers.length;
+  document.getElementById('h-seances').textContent=db.seances.length;
+  document.getElementById('h-dossiers').textContent=db.dossiers.length;
+}
+function updateSelects(){
+  const opts=db.seances.length?['<option value="">— Choisissez —</option>',...[...db.seances].reverse().map(s=>`<option value="${s.id}">${s.date} · ${s.titre}`)].join(''):'<option value="">Aucune séance</option>';
+  ['vivante-select','fiche-select'].forEach(id=>document.getElementById(id).innerHTML=opts);
+}
+function refreshViews(name){
+  if(name==='dossiers')renderDossiers();
+  if(name==='historique')renderHistorique();
+  if(name==='sync')renderSync();
+  if(name==='vivante'||name==='fiche')updateSelects();
+}
+
+document.getElementById('modal-dossier').addEventListener('click',function(e){if(e.target===this)fermerModal('modal-dossier');});
+document.getElementById('modal-seance').addEventListener('click',function(e){if(e.target===this)fermerModal('modal-seance');});
+
+loadDB();
+updateBadges();updateSelects();
+const savedModel=localStorage.getItem('osny_model');if(savedModel)selectModel(savedModel);
+const savedKey=localStorage.getItem('osny_apikey');if(savedKey)document.getElementById('api-key-field').value=savedKey;
+document.getElementById('seance-texte').addEventListener('input',majCharCount);
+</script>
+</body>
+</html>
